@@ -13,6 +13,7 @@
 #include "commands.h"
 #include "deque"
 #define GAME_PORT 27015
+#define COORD_CMD 1000
 const char LISTEN_ANY[]  = "0.0.0.0";
 class SocketThreadBase
 {

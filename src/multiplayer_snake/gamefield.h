@@ -14,6 +14,7 @@ class GameField
 {
     friend class Snake;
     friend class MainWindow;
+    friend class Food;
 public:
     GameField(int x,int y,QTableWidget * _snakeView);
     ~GameField();
@@ -24,6 +25,7 @@ public:
     void setClientAddress(QString,ushort);
     void setServerMode(QString,ushort);
     bool isClient();
+    bool isConnected();
     bool gameOver = false;
 private:
     bool clientMode;

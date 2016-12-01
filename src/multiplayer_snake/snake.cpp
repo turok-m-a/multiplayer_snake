@@ -33,7 +33,8 @@ void Snake::moveForward()
         if (!field->connected)
             return;
         if (!field->isClient()){ // server
-
+        commands currentCmd = field->server->getCommand();
+        commandHandler(currentCmd);
         if (dead) return;
         if ((blocks.front().xPos >= field->xSize-1 && currentMoveDirection == RIGHT) ||
            (blocks.front().xPos <= 0 && currentMoveDirection == LEFT) ||
@@ -123,12 +124,24 @@ void Snake::moveForward()
  }
 
 bool Snake::commandHandler(commands cmd){
+    if (field->isClient()){
     switch (cmd) {
     case START: {
             dead = false;
             return false;
         }
      default: return true;
+    }
+    } else {
+        if (cmd == COORDINATES){
+            int posX = field->server->getCommand() - COORD_CMD;
+            int posY = field->server->getCommand() - COORD_CMD;
+            field->food->moveToPosition(posX,posY);
+        }
+        if (cmd != NO_CMD){
+            field->food->moveToDirection(cmdToDirection(cmd,UP));
+        }
+        return true;
     }
 }
 

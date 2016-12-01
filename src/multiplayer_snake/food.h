@@ -9,6 +9,7 @@ public:
     bool collide(int, int);
     void move();
     void moveToDirection(direction);
+    void moveToPosition(int x,int y);
 private:
     GameField * fieldPtr;
     int posX;

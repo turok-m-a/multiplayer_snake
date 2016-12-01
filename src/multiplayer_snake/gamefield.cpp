@@ -69,3 +69,6 @@ void GameField::update(){
  bool GameField::isClient(){
      return clientMode;
  }
+bool GameField::isConnected(){
+     return connected;
+ }
